@@ -1,0 +1,20 @@
+import sys
+import math
+
+l = int(input())
+h = int(input())
+t = input()
+mot = t.upper()
+lettres = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+for i in range(h):
+    row = input()
+    for k in mot:
+        if k in lettres:
+            ind = lettres.index(k)
+            print(row[ind*l:(ind*l)+l],end="")
+        else:
+            print(row[26*l:(26*l)+l],end="")
+    print()
+
+
+
