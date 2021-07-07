@@ -1,0 +1,12 @@
+import sys
+import math
+
+while True:
+    index_plus_haute = 0
+    plus_haute = 0
+    for i in range(8):
+        mountain_h = int(input()) 
+        if i == 0 or plus_haute < mountain_h:
+            index_plus_haute = i
+            plus_haute = mountain_h
+    print(index_plus_haute)
