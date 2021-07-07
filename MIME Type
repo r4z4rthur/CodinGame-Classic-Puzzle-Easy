@@ -1,0 +1,19 @@
+import sys
+import math
+
+n = int(input()) 
+q = int(input())  
+book = {}
+for i in range(n):
+
+    ext, mt = input().split()
+    book[ext.upper()] = mt
+for i in range(q):
+    fname = input() 
+    casse = fname.split(".")
+    if len(casse) > 1 and casse[-1].upper() in book.keys():
+        mot = casse[-1].upper()
+        print(book[mot])
+    else:
+        print("UNKNOWN")
+
