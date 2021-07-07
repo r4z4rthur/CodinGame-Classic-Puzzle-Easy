@@ -1,0 +1,40 @@
+import sys
+import math
+
+light_x, light_y, initial_tx, initial_ty = [int(i) for i in input().split()]
+thor_x = initial_tx
+thor_y = initial_ty
+
+while True:
+    remaining_turns = int(input())  
+    if light_x == thor_x or light_y == thor_y:
+        if light_y > thor_y:
+            thor_y += 1
+            print("S")
+        if light_y < thor_y:
+            thor_y -= 1
+            print("N")
+        if light_x > thor_x:
+            thor_x += 1
+            print("E")
+        if light_x < thor_x:
+            thor_x -= 1
+            print("W")
+    else:
+        if light_x < thor_x:
+            thor_x -= 1
+            if light_y > thor_y:
+                thor_y += 1
+                print("SW")
+            else:
+                thor_y -= 1
+                print("NW")
+        else:
+            thor_x += 1
+            if light_y > thor_y:
+                thor_y += 1    
+                print("SE")
+            else:
+                thor_y -= 1
+                print("NE")
+
