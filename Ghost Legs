@@ -1,0 +1,20 @@
+import sys
+import math
+
+w, h = [int(i) for i in input().split()]
+lignes = []
+for i in range(h):
+    line = input()
+    lignes.append(line)
+
+entrees = lignes[0].split("  ")
+
+for entree in entrees:
+    ind = lignes[0].index(entree)
+    for ligne in lignes[1:]:
+        if ind <= w - 3 and ligne[ind + 1] == "-":
+            ind += 3
+        elif ind >= 3 and ligne[ind - 1] == "-":
+            ind -= 3
+    print("{}{}".format(entree, lignes[-1][ind])) 
+
