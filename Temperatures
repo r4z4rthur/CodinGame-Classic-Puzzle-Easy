@@ -1,0 +1,18 @@
+import sys
+import math
+
+n = int(input())
+result = 0
+if n == 0:
+    print(0)
+else:
+    result = 5526
+    for i in input().split():
+        t = int(i)
+        if abs(t) < abs(result):
+            result = t
+        if abs(t) == abs(result):
+            result = max(t, result)
+    print(result)
+
+
