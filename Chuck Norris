@@ -1,0 +1,29 @@
+import sys
+import math
+
+message = input()
+b_m =[]
+for i in message:
+    binary = bin(ord(i))[2:]
+    if len(binary) < 7:
+        diff = 7 - len(binary)
+        binary = "0"*diff + binary
+    b_m.append(binary)
+b_r = "".join(b_m)
+l = len(b_r)
+casse = [-1]
+for i in range(l):
+    if i == l - 1:
+        casse.append(i)
+    elif b_r[i] == b_r[i + 1]:
+        pass
+    elif b_r[i] != b_r[i + 1]:
+        casse.append(i) 
+blocks = [b_r[casse[i]+1:casse[i+1]+1] for i in range(len(casse) - 1)]
+for i in range(len(blocks)):
+    if blocks[i][0] == "1":
+        print("0 "+ "0"*len(blocks[i]),end="")
+    else:
+        print("00 "+ "0"*len(blocks[i]),end="")
+    if i != len(blocks) - 1:
+        print(" ", end="")
