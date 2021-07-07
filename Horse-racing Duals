@@ -1,0 +1,18 @@
+import sys
+import math
+
+n = int(input())
+diff = 9999999
+powers = []
+for i in range(n):
+    pi = int(input())
+    powers.append(pi)
+powers.sort() 
+for i in range(n - 1):
+    diffp = abs(powers[i] - powers[i+1])
+    if diffp <= diff:
+        diff = diffp
+    if diff == 1:
+       break
+print(diff)
+
