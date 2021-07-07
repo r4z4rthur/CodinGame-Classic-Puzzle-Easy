@@ -1,0 +1,34 @@
+import sys
+import math
+
+def distance(longiA, latiA, longiB, latiB):
+    x = (longiB - longiA) * math.cos((latiA + latiB) / 2)
+    y = latiB - latiA
+    d = math.sqrt(x**2 + y**2) * 6371
+    return d
+
+def trans(donnee):
+    A = donnee.split(",")
+    B = ".".join(A)
+    C = float(B) * math.pi / 180
+    return C
+
+lon = input()
+lon_n = trans(lon)
+lat = input()
+lat_n = trans(lat)
+n = int(input())
+name = ""
+plus_p = 1000000
+for i in range(n):
+    defib = input()
+    defibK = defib.split(";")
+    lonfib = trans(defibK[-2])
+    latfib = trans(defibK[-1])
+    distfib = distance(lon_n, lat_n, lonfib, latfib)
+    if i == 0 or distfib <= plus_p:
+        plus_p = distfib
+        name = defibK[1] 
+    
+print(name)
+
