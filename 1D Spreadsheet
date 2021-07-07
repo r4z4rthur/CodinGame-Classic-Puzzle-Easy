@@ -1,0 +1,40 @@
+import sys
+import math
+
+def action(d, dict1):
+    if d["solved"] == False:
+        for arg in ["arg1", "arg2"]:
+            if "$" in d["operations"][arg]:
+                arg_value = d["operations"][arg].replace("$", "")
+                action(dict1[int(arg_value)], dict1)
+                d["operations"][arg] = dict1[int(arg_value)]["value"]
+
+        if d["operations"]["operation"] == "VALUE":
+            d["value"] = int(d["operations"]["arg1"])
+
+        elif d["operations"]["operation"] == "ADD":
+            d["value"] = int(d["operations"]["arg1"]) + int(d["operations"]["arg2"])
+
+        elif d["operations"]["operation"] == "SUB":
+            d["value"] = int(d["operations"]["arg1"]) - int(d["operations"]["arg2"])
+
+        else:
+            d["value"] = int(d["operations"]["arg1"]) * int(d["operations"]["arg2"])
+
+        d["solved"] = True
+
+
+n = int(input())
+lignes = {}
+for i in range(n):
+    operation, arg_1, arg_2 = input().split()
+    lignes[i] = {"value":None,
+                "operations":{
+                    "operation":operation,
+                    "arg1":arg_1,
+                    "arg2":arg_2
+                },
+                "solved":False}
+for i in range(n):
+    action(lignes[i], lignes)
+    print(lignes[i]["value"])
