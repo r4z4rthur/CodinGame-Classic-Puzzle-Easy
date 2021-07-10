@@ -1,0 +1,58 @@
+import sys
+import math
+ 
+def alive_rule(num):
+    vivant = []
+    for i in range(len(num)):
+        if num[i] == "1":
+            vivant.append(i)
+    return vivant
+
+def dead_rule(num):
+    mort = []
+    for i in range(len(num)):
+        if num[i] == "1":
+            mort.append(i)
+    return mort
+
+def tr(M):
+    cells_after = [["" for i in range(w)] for i in range(h)] 
+    for i in range(h):
+        for j in range(w):
+            voisins = [[i-1, j-1], [i-1, j], [i-1, j+1], [i, j-1], [i, j+1], [i+1, j-1], [i+1, j], [i+1, j+1]]
+            v_1 =[]
+            count = 0
+            for voisin in voisins:
+                if voisin[0] in range(h) and voisin[1] in range(w):
+                    v_1.append(voisin)
+            for vr in v_1:
+                if M[vr[0]][vr[1]] == "O":
+                    count += 1                           
+            if M[i][j] == ".":
+                if count in D:
+                    cells_after[i][j] = "O"
+                else:
+                    cells_after[i][j] = "."
+            elif M[i][j] == "O":
+                if count in A:
+                    cells_after[i][j] = "O"
+                else:
+                    cells_after[i][j] = "." 
+    return cells_after
+
+h, w, n = [int(i) for i in input().split()]
+alive = input()
+dead = input()
+A = alive_rule(alive)
+D = dead_rule(dead)
+cells = []
+for i in range(h):
+    line = input()
+    cells.append(list(line))  
+
+reponse = tr(cells)
+for i in range(n-1):
+    reponse = tr(reponse)
+
+for cell in reponse:
+    print("".join(cell))
