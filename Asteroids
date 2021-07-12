@@ -1,0 +1,39 @@
+import sys
+import math
+
+w, h, t1, t2, t3 = [int(i) for i in input().split()]
+diff = t2 - t1
+diff2 = t3 - t2
+firstp = []
+secondp = []
+T1 = {}
+T2 = {}
+T3 = [["." for i in range(w)] for j in range(h)]
+moves = {}
+position = {}
+for i in range(h):
+    first_picture_row, second_picture_row = input().split()
+    firstp.append(first_picture_row)
+    secondp.append(second_picture_row)
+
+for i in range(w):
+    for j in range(h):
+        if firstp[i][j] != ".":
+            T1[firstp[i][j]] = [i, j]
+        if secondp[i][j] != ".":
+            T2[secondp[i][j]] = [i, j]
+
+for ast in T1:
+    move1 = (T2[ast][0] - T1[ast][0])/diff 
+    move2 = (T2[ast][1] - T1[ast][1])/diff
+    moves[ast] = [move1, move2]
+
+for ast in sorted(moves, reverse = True):
+    a = math.floor(T2[ast][0] + diff2 * moves[ast][0])
+    b = math.floor(T2[ast][1] + diff2 * moves[ast][1])
+    if a in range(w) and b in range(h):
+        T3[a][b] = ast
+
+for i in T3:
+    print("".join(i))
+    
