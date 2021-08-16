@@ -1,0 +1,46 @@
+import sys
+import math
+
+def encode(message):
+    message1 = []
+    for i in range(len(message)):
+        ind = letters.index(message[i])
+        letter = letters[(ind + i + start_number) % 26]
+        ind1 = letters.index(letter)
+        letter1 = rotors[0][ind1]
+        ind2 = letters.index(letter1)
+        letter2 = rotors[1][ind2]
+        ind3 = letters.index(letter2)
+        letter3 = rotors[2][ind3]
+        message1.append(letter3)
+    final_message = "".join(message1)
+    print(final_message)
+
+def decode(message):
+    message1 = []
+    for i in range(len(message)):
+        ind3 = rotors[2].index(message[i])
+        letter3 = letters[ind3]
+        ind2 = rotors[1].index(letter3)
+        letter2 = letters[ind2]
+        ind1 = rotors[0].index(letter2)
+        letter1 = letters[ind1]
+        ind = letters.index(letter1) 
+        letter = letters[(ind - start_number - i) % 26]      
+        message1.append(letter)
+    final_message = "".join(message1)
+    print(final_message)
+
+letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+operation = input()
+start_number = int(input())
+rotors = []
+for i in range(3):
+    rotor = input()
+    rotors.append(rotor)
+
+message = input()
+if operation == "ENCODE":
+    encode(message)
+elif operation == "DECODE":
+    decode(message)
