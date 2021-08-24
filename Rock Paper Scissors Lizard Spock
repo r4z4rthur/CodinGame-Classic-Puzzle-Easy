@@ -1,0 +1,46 @@
+import sys
+import math
+
+def FIGHT(a, b):
+    if a[1] == b[1]:
+        if a[0] < b[0]:
+            a[2].append(b[0])
+            return a
+        else:
+            b[2].append(a[0])
+            return b
+    else:
+        if b[1] in rule[a[1]]:
+            b[2].append(a[0])
+            return b
+        else:
+            a[2].append(b[0])
+            return a
+
+def ROUND(lp):
+    result = []
+    for i in range(int(len(lp)/2)):
+        m = 2*i + 1
+        res = FIGHT(lp[m-1], lp[m])
+        result.append(res)
+    return result
+
+def TOURNAMENT(lp):
+    n = int(math.log(len(lp))/math.log(2))
+    for i in range(n):
+        lp = ROUND(lp)
+    return lp
+    
+rule = {'R': ['P', 'S'], 'P': ['C', 'L'], 'C': ['R', 'S'], 'L': ['R', 'C'], 'S': ['L', 'P']}
+n = int(input())
+players = []
+for i in range(n):
+    inputs = input().split()
+    numplayer = int(inputs[0])
+    signplayer = inputs[1]
+    players.append([numplayer, signplayer,[]])
+
+winner = TOURNAMENT(players)
+
+print(winner[0][0])
+print(" ".join(map(str, winner[0][2])))
